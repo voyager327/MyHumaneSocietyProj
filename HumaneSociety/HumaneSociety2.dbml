@@ -11,14 +11,6 @@
       <Association Name="USState_Address" Member="USState" ThisKey="USStateId" OtherKey="USStateId" Type="USState" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.USStates" Member="USStates">
-    <Type Name="USState">
-      <Column Name="USStateId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Abbreviation" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
-      <Association Name="USState_Address" Member="Addresses" ThisKey="USStateId" OtherKey="USStateId" Type="Address" />
-    </Type>
-  </Table>
   <Table Name="dbo.Adoptions" Member="Adoptions">
     <Type Name="Adoption">
       <Column Name="ClientId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -115,6 +107,14 @@
       <Column Name="ShotId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="Shot_AnimalShot" Member="AnimalShots" ThisKey="ShotId" OtherKey="ShotId" Type="AnimalShot" />
+    </Type>
+  </Table>
+  <Table Name="dbo.USStates" Member="USStates">
+    <Type Name="USState">
+      <Column Name="USStateId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Abbreviation" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Association Name="USState_Address" Member="Addresses" ThisKey="USStateId" OtherKey="USStateId" Type="Address" />
     </Type>
   </Table>
 </Database>

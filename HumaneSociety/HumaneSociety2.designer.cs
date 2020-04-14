@@ -33,9 +33,6 @@ namespace HumaneSociety
     partial void InsertAddress(Address instance);
     partial void UpdateAddress(Address instance);
     partial void DeleteAddress(Address instance);
-    partial void InsertUSState(USState instance);
-    partial void UpdateUSState(USState instance);
-    partial void DeleteUSState(USState instance);
     partial void InsertAdoption(Adoption instance);
     partial void UpdateAdoption(Adoption instance);
     partial void DeleteAdoption(Adoption instance);
@@ -63,6 +60,9 @@ namespace HumaneSociety
     partial void InsertShot(Shot instance);
     partial void UpdateShot(Shot instance);
     partial void DeleteShot(Shot instance);
+    partial void InsertUSState(USState instance);
+    partial void UpdateUSState(USState instance);
+    partial void DeleteUSState(USState instance);
     #endregion
 		
 		public HumaneSociety2DataContext() : 
@@ -100,14 +100,6 @@ namespace HumaneSociety
 			get
 			{
 				return this.GetTable<Address>();
-			}
-		}
-		
-		public System.Data.Linq.Table<USState> USStates
-		{
-			get
-			{
-				return this.GetTable<USState>();
 			}
 		}
 		
@@ -180,6 +172,14 @@ namespace HumaneSociety
 			get
 			{
 				return this.GetTable<Shot>();
+			}
+		}
+		
+		public System.Data.Linq.Table<USState> USStates
+		{
+			get
+			{
+				return this.GetTable<USState>();
 			}
 		}
 	}
@@ -408,144 +408,6 @@ namespace HumaneSociety
 		{
 			this.SendPropertyChanging();
 			entity.Address = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.USStates")]
-	public partial class USState : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _USStateId;
-		
-		private string _Name;
-		
-		private string _Abbreviation;
-		
-		private EntitySet<Address> _Addresses;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnUSStateIdChanging(int value);
-    partial void OnUSStateIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnAbbreviationChanging(string value);
-    partial void OnAbbreviationChanged();
-    #endregion
-		
-		public USState()
-		{
-			this._Addresses = new EntitySet<Address>(new Action<Address>(this.attach_Addresses), new Action<Address>(this.detach_Addresses));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USStateId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int USStateId
-		{
-			get
-			{
-				return this._USStateId;
-			}
-			set
-			{
-				if ((this._USStateId != value))
-				{
-					this.OnUSStateIdChanging(value);
-					this.SendPropertyChanging();
-					this._USStateId = value;
-					this.SendPropertyChanged("USStateId");
-					this.OnUSStateIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Abbreviation", DbType="VarChar(2)")]
-		public string Abbreviation
-		{
-			get
-			{
-				return this._Abbreviation;
-			}
-			set
-			{
-				if ((this._Abbreviation != value))
-				{
-					this.OnAbbreviationChanging(value);
-					this.SendPropertyChanging();
-					this._Abbreviation = value;
-					this.SendPropertyChanged("Abbreviation");
-					this.OnAbbreviationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="USState_Address", Storage="_Addresses", ThisKey="USStateId", OtherKey="USStateId")]
-		public EntitySet<Address> Addresses
-		{
-			get
-			{
-				return this._Addresses;
-			}
-			set
-			{
-				this._Addresses.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Addresses(Address entity)
-		{
-			this.SendPropertyChanging();
-			entity.USState = this;
-		}
-		
-		private void detach_Addresses(Address entity)
-		{
-			this.SendPropertyChanging();
-			entity.USState = null;
 		}
 	}
 	
@@ -2561,6 +2423,144 @@ namespace HumaneSociety
 		{
 			this.SendPropertyChanging();
 			entity.Shot = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.USStates")]
+	public partial class USState : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _USStateId;
+		
+		private string _Name;
+		
+		private string _Abbreviation;
+		
+		private EntitySet<Address> _Addresses;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUSStateIdChanging(int value);
+    partial void OnUSStateIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnAbbreviationChanging(string value);
+    partial void OnAbbreviationChanged();
+    #endregion
+		
+		public USState()
+		{
+			this._Addresses = new EntitySet<Address>(new Action<Address>(this.attach_Addresses), new Action<Address>(this.detach_Addresses));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USStateId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int USStateId
+		{
+			get
+			{
+				return this._USStateId;
+			}
+			set
+			{
+				if ((this._USStateId != value))
+				{
+					this.OnUSStateIdChanging(value);
+					this.SendPropertyChanging();
+					this._USStateId = value;
+					this.SendPropertyChanged("USStateId");
+					this.OnUSStateIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Abbreviation", DbType="VarChar(2)")]
+		public string Abbreviation
+		{
+			get
+			{
+				return this._Abbreviation;
+			}
+			set
+			{
+				if ((this._Abbreviation != value))
+				{
+					this.OnAbbreviationChanging(value);
+					this.SendPropertyChanging();
+					this._Abbreviation = value;
+					this.SendPropertyChanged("Abbreviation");
+					this.OnAbbreviationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="USState_Address", Storage="_Addresses", ThisKey="USStateId", OtherKey="USStateId")]
+		public EntitySet<Address> Addresses
+		{
+			get
+			{
+				return this._Addresses;
+			}
+			set
+			{
+				this._Addresses.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Addresses(Address entity)
+		{
+			this.SendPropertyChanging();
+			entity.USState = this;
+		}
+		
+		private void detach_Addresses(Address entity)
+		{
+			this.SendPropertyChanging();
+			entity.USState = null;
 		}
 	}
 }
