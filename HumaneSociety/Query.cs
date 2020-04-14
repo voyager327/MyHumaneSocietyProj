@@ -8,11 +8,11 @@ namespace HumaneSociety
 {
     public static class Query
     {        
-        static HumaneSocietyDataContext db;
+        static HumaneSociety2DataContext db;
 
         static Query()
         {
-            db = new HumaneSocietyDataContext();
+            db = new HumaneSociety2DataContext();
         }
 
         internal static List<USState> GetStates()

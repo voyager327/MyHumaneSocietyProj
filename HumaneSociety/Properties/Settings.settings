@@ -5,10 +5,17 @@
     <Setting Name="HumaneSociety2ConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+<<<<<<< HEAD
   &lt;ConnectionString&gt;Data Source=LAPTOP-NHO0NO3H\SQLEXPRESS;Initial Catalog=HumaneSociety2;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False&lt;/ConnectionString&gt;
   &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=LAPTOP-NHO0NO3H\SQLEXPRESS;Initial Catalog=HumaneSociety2;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False</Value>
+=======
+  &lt;ConnectionString&gt;Data Source=GARRETSLAPTOP\SQLEXPRESS02;Initial Catalog=HumaneSociety2;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=GARRETSLAPTOP\SQLEXPRESS02;Initial Catalog=HumaneSociety2;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False</Value>
+>>>>>>> 6d7c8fef15bab68fd1b284db3c372e129ee73f09
     </Setting>
   </Settings>
 </SettingsFile>
