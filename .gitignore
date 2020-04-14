@@ -348,3 +348,16 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+App.config
+
+HumaneSociety.dbml
+HumaneSociety.dbml.layout
+HumaneSociety.designer.cs
+
+HumaneSociety2.dbml
+HumaneSociety2.dbml.layout
+HumaneSociety2.designer.cs
+
+Settings.Designer.cs
+Setting.settings
