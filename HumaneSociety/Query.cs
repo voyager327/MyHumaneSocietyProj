@@ -194,8 +194,59 @@ namespace HumaneSociety
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
-        {            
-            throw new NotImplementedException();
+        {
+            Animal animalToUpdate = null;
+            try
+            {
+                animalToUpdate = db.Animals.Where(c => c.AnimalId == animalId).FirstOrDefault();
+            }
+            catch
+            {
+                Console.WriteLine("The id given doesn't match one in the system");
+                Console.WriteLine("No changes have been saved");
+                Console.WriteLine("Please try again");
+            }
+            foreach(KeyValuePair<int,string> value in updates)
+            {
+                switch (value.Key)
+                {
+                    case 1:
+                        animalToUpdate.Age = int.Parse(value.Value);
+                        break;
+                    case 2:
+                        animalToUpdate.Category.Name = value.Value;
+                        break;
+                    case 3:
+                        animalToUpdate.Demeanor = value.Value;
+                        break;
+                    case 4:
+                        animalToUpdate.DietPlan.Name  = value.Value;
+                        break;
+                    case 5:
+                        animalToUpdate.Gender = value.Value;
+                        break;
+                    case 6:
+                        animalToUpdate.KidFriendly = Convert.ToBoolean(value.Value);
+                        break;
+                    case 7:
+                        animalToUpdate.Name = value.Value;
+                        break;
+                    case 8:
+                        animalToUpdate.PetFriendly = Convert.ToBoolean(value.Value);
+                        break;
+                    case 9:
+                        animalToUpdate.Weight = int.Parse(value.Value);
+                        break;
+                    case 0:
+                        animalToUpdate.AdoptionStatus = value.Value;
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+            db.SubmitChanges();
+
         }
 
         internal static void RemoveAnimal(Animal animal)
