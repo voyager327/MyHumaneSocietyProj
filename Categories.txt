@@ -1,0 +1,9 @@
+insert into Categories
+Values('Dog')
+
+
+Dog
+Cat
+Bird
+Hamster
+Iguana

@@ -224,12 +224,25 @@ namespace HumaneSociety
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
-            throw new NotImplementedException();
+            var animalCategoryName = UserInterface.GetStringData("Category", "The Name of the Animal is");
+            var animalDietPlanName = UserInterface.GetStringData("Diet Plan ", "The Name of the Animal's");
+
+            animal.CategoryId = Query.GetCategoryId(animalCategoryName);
+            animal.AdoptionStatus = UserInterface.GetStringData("Adoption Status", "The Animal");
+            animal.Age = UserInterface.GetIntegerData("The Animal's", "Age");
+            animal.AnimalId = UserInterface.GetIntegerData("The Animal's", "ID Number");
+            animal.Demeanor = UserInterface.GetStringData("Demeanor", "The Animal's");
+            animal.DietPlanId = Query.GetDietPlanId(animalDietPlanName);
+            animal.Gender = UserInterface.GetStringData("Gender", "The Animal is");
+            animal.KidFriendly = UserInterface.GetBitData("Kidfriendly", "The Animal is");
+            animal.Name = UserInterface.GetStringData("Name", "The Animal's");
+            animal.PetFriendly = UserInterface.GetBitData("Petfriendly", "The Animal is");
+            animal.Weight = UserInterface.GetIntegerData("The Animal's", "Weight");
         }
 
         internal static Animal GetAnimalByID(int id)
         {
-            throw new NotImplementedException();
+            return db.Animals.FirstOrDefault(b => b.AnimalId == id);
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
@@ -239,7 +252,8 @@ namespace HumaneSociety
 
         internal static void RemoveAnimal(Animal animal)
         {
-            throw new NotImplementedException();
+            db.Animals.DeleteOnSubmit(animal);
+            db.SubmitChanges();
         }
         
         // TODO: Animal Multi-Trait Search
@@ -251,17 +265,20 @@ namespace HumaneSociety
         // TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
-            throw new NotImplementedException();
+            var categoryIDWanted = db.Categories.Where(c => c.Name == categoryName).Select(d => d.CategoryId).FirstOrDefault();
+            return categoryIDWanted;
         }
         
         internal static Room GetRoom(int animalId)
         {
-            throw new NotImplementedException();
+            var rooms = db.Rooms.Where(e => e.AnimalId == animalId).SingleOrDefault();
+            return rooms;
         }
         
         internal static int GetDietPlanId(string dietPlanName)
         {
-            throw new NotImplementedException();
+           var dietPlanIdWanted = db.DietPlans.Where(f => f.Name == dietPlanName).Select(g => g.DietPlanId).FirstOrDefault();
+            return dietPlanIdWanted;
         }
 
         // TODO: Adoption CRUD Operations
