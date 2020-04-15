@@ -170,6 +170,17 @@ namespace HumaneSociety
                 case "create":
                     CreateNewEmployee();
                     break;
+                case "read":
+                    Console.WriteLine(employee.FirstName,employee.LastName,employee.UserName,employee.Email);
+                    db.SubmitChanges();
+                    break;
+                case "Update":
+                    UpdateEmployee(employee);
+                    break;
+                case "Delete":
+                    db.Employees.DeleteOnSubmit(employee);
+                    db.SubmitChanges();
+                    break;
                 default:
                     Console.WriteLine();
                     break; 
@@ -182,25 +193,16 @@ namespace HumaneSociety
             employee.FirstName = UserInterface.GetStringData("first name", "the employee's");
             employee.LastName = UserInterface.GetStringData("last name", "the employee's");
             employee.EmployeeNumber = int.Parse(UserInterface.GetStringData("employee number", "the employee's"));
-            employee.Email = UserInterface.GetStringData("email", "the employee's"); ;
-            try
-            {
-                Query.RunEmployeeQueries(employee, "create");
-                UserInterface.DisplayUserOptions("Employee addition successful.");
-            }
-            catch
-            {
-                Console.Clear();
-                UserInterface.DisplayUserOptions("Employee addition unsuccessful please try again or type exit;");
-                return;
-            }
-        }
-        internal static void UpdateEmployee()
-        {
-            //Employee employeeFromDb = null;
+            employee.Email = UserInterface.GetStringData("email", "the employee's");
+            db.Employees.InsertOnSubmit(employee);
+            db.SubmitChanges();
             
-                         //employeeFromDb = db.Employees.Where(e => e.EmployeeId == employee.EmployeeId).Single();
-            Employee employee = new Employee();
+        }
+        
+        internal static void UpdateEmployee(Employee employee)
+        {
+            
+            Employee newEmployee = new Employee(); //////newEmployee needs to be fixed/////
             employee.FirstName = UserInterface.GetStringData("first name", "the employee's");
             employee.LastName = UserInterface.GetStringData("last name", "the employee's");
             employee.EmployeeNumber = int.Parse(UserInterface.GetStringData("employee number", "the employee's"));
@@ -209,6 +211,7 @@ namespace HumaneSociety
             {
                 Query.RunEmployeeQueries(employee, "update");
                 UserInterface.DisplayUserOptions("Employee update successful.");
+                //
             }
             catch
             {
@@ -216,11 +219,12 @@ namespace HumaneSociety
                 Console.Clear();
                 UserInterface.DisplayUserOptions("Employee update unsuccessful please try again or type exit;");
                 return;
-
+               
             }
                 
 
         }
+       
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
@@ -284,7 +288,7 @@ namespace HumaneSociety
         // TODO: Adoption CRUD Operations
         internal static void Adopt(Animal animal, Client client)
         {
-            throw new NotImplementedException();
+            
         }
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
@@ -310,7 +314,37 @@ namespace HumaneSociety
 
         internal static void UpdateShot(string shotName, Animal animal)
         {
-            throw new NotImplementedException();
+            List<string> shotInfo = new List<string>();
+            var shots = Query.GetShots(animal);
+            foreach (AnimalShot shot in shots.ToList())
+
+            {
+                shotInfo.Add($"{shot.Shot.Name} Date: {shot.DateReceived}");
+            }
+
+            if (shotInfo.Count > 0)
+            {
+                UserInterface.DisplayUserOptions(shotInfo);
+            }
+            if (UserInterface.GetBitData("Would you like to Update shots?"))
+            {
+                string shotToAdd = UserInterface.GetStringData("the animal received", "the shot");
+                Query.UpdateShot(shotToAdd, animal);
+            }
+
         }
     }
+    internal static void Adopt(Animal animal, Client client)
+    {
+         Adoption newAdoption = new Adoption();
+        newAdoption.AdoptionFee = 75;
+        newAdoption.AnimalId = animal.AnimalId;
+        newAdoption.ClientId = client.ClientId;
+        newAdoption.ApprovalStatus = "Approved";
+        newAdoption.PaymentCollected = true;
+        db.Shot.InsertOnSubmit(newShots);
+        db.SubmitChanges();
+    }
+
+    
 }
