@@ -172,8 +172,20 @@ namespace HumaneSociety
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
+            var animalCategoryName = UserInterface.GetStringData("Category", "The Name of the Animal is");
+            var animalDietPlanName = UserInterface.GetStringData("Diet Plan ", "The Name of the Animal's");
 
-            animal.CategoryId = Query.GetAnimalByID(animalCategoryName);
+            animal.CategoryId = Query.GetCategoryId(animalCategoryName);
+            animal.AdoptionStatus = UserInterface.GetStringData("Adoption Status", "The Animal");
+            animal.Age = UserInterface.GetIntegerData("The Animal's", "Age");
+            animal.AnimalId = UserInterface.GetIntegerData("The Animal's", "ID Number");
+            animal.Demeanor = UserInterface.GetStringData("Demeanor", "The Animal's");
+            animal.DietPlanId = Query.GetDietPlanId(animalDietPlanName);
+            animal.Gender = UserInterface.GetStringData("Gender", "The Animal is");
+            animal.KidFriendly = UserInterface.GetBitData("Kidfriendly", "The Animal is");
+            animal.Name = UserInterface.GetStringData("Name", "The Animal's");
+            animal.PetFriendly = UserInterface.GetBitData("Petfriendly", "The Animal is");
+            animal.Weight = UserInterface.GetIntegerData("The Animal's", "Weight");
         }
 
         internal static Animal GetAnimalByID(int id)
