@@ -256,9 +256,48 @@ namespace HumaneSociety
         }
         
         // TODO: Animal Multi-Trait Search
-        internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
+        internal static List<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
         {
-            throw new NotImplementedException();
+            List<Animal> animalsToSeach = db.Animals.ToList();
+            foreach (KeyValuePair<int,string> update in updates)
+            {
+                switch (update.Key)
+                {
+                    case 1:
+                        animalsToSeach = animalsToSeach.Where(i => i.Age == Convert.ToInt32(update.Value)).ToList();
+                        break;
+                    case 2:
+                        animalsToSeach = animalsToSeach.Where(j => j.AnimalId == Convert.ToInt32(update.Value)).ToList();
+                        break;
+                    case 3:
+                        animalsToSeach = animalsToSeach.Where(k => k.CategoryId == Convert.ToInt32(update.Key)).ToList();
+                        break;
+                    case 4:
+                        animalsToSeach = animalsToSeach.Where(l => l.Demeanor == (update.Value)).ToList();
+                        break;
+                    case 5:
+                        animalsToSeach = animalsToSeach.Where(m => m.DietPlanId == Convert.ToInt32(update.Key)).ToList();
+                        break;
+                    case 6:
+                        animalsToSeach = animalsToSeach.Where(n => n.Gender == (update.Value)).ToList();
+                        break;
+                    case 7:
+                        animalsToSeach = animalsToSeach.Where(o => o.KidFriendly == Convert.ToBoolean(update.Value)).ToList();
+                        break;
+                    case 8:
+                        animalsToSeach = animalsToSeach.Where(p => p.Name == (update.Value)).ToList();
+                        break;
+                    case 9:
+                        animalsToSeach = animalsToSeach.Where(q => q.PetFriendly == Convert.ToBoolean(update.Value)).ToList();
+                        break;
+                    case 0:
+                        animalsToSeach = animalsToSeach.Where(r => r.Weight == Convert.ToInt32(update.Value)).ToList();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return animalsToSeach;
         }
          
         // TODO: Misc Animal Things
@@ -283,22 +322,34 @@ namespace HumaneSociety
         // TODO: Adoption CRUD Operations
         internal static void Adopt(Animal animal, Client client)
         {
-            throw new NotImplementedException();
+            Adoption newAdoption = new Adoption();
+            newAdoption.AdoptionFee = 75;
+            newAdoption.AnimalId = animal.AnimalId;
+            newAdoption.ClientId = client.ClientId;
+            newAdoption.ApprovalStatus = "Approved";
+            newAdoption.PaymentCollected = true;
+            db.Adoptions.InsertOnSubmit(newAdoption);
+            db.SubmitChanges();
         }
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
-            throw new NotImplementedException();
+            return db.Adoptions;
         }
 
         internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
         {
-            throw new NotImplementedException();
+            Adoption adoptionTobeUpdated = null;
+            adoptionTobeUpdated = db.Adoptions.Where(g => g.AnimalId == adoption.AnimalId && g.ClientId == adoption.ClientId).SingleOrDefault();
+            adoptionTobeUpdated.ApprovalStatus = isAdopted.ToString();
         }
 
         internal static void RemoveAdoption(int animalId, int clientId)
         {
-            throw new NotImplementedException();
+            Adoption removeAdoption = null;
+            removeAdoption = db.Adoptions.Where(h => h.AnimalId == animalId && h.ClientId == clientId).SingleOrDefault();
+            db.Adoptions.DeleteOnSubmit(removeAdoption);
+            db.SubmitChanges();
         }
 
         // TODO: Shots Stuff
