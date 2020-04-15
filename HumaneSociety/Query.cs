@@ -160,15 +160,67 @@ namespace HumaneSociety
             return employeeWithUserName != null;
         }
 
-
         //// TODO Items: ////
-        
+
         // TODO: Allow any of the CRUD operations to occur here
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
-            throw new NotImplementedException();
-        }
+          switch(crudOperation)
+          {
+                case "create":
+                    CreateNewEmployee();
+                    break;
+                default:
+                    Console.WriteLine();
+                    break; 
+          }
 
+        }
+        internal static void CreateNewEmployee()
+        {
+            Employee employee = new Employee();
+            employee.FirstName = UserInterface.GetStringData("first name", "the employee's");
+            employee.LastName = UserInterface.GetStringData("last name", "the employee's");
+            employee.EmployeeNumber = int.Parse(UserInterface.GetStringData("employee number", "the employee's"));
+            employee.Email = UserInterface.GetStringData("email", "the employee's"); ;
+            try
+            {
+                Query.RunEmployeeQueries(employee, "create");
+                UserInterface.DisplayUserOptions("Employee addition successful.");
+            }
+            catch
+            {
+                Console.Clear();
+                UserInterface.DisplayUserOptions("Employee addition unsuccessful please try again or type exit;");
+                return;
+            }
+        }
+        internal static void UpdateEmployee()
+        {
+            //Employee employeeFromDb = null;
+            
+                         //employeeFromDb = db.Employees.Where(e => e.EmployeeId == employee.EmployeeId).Single();
+            Employee employee = new Employee();
+            employee.FirstName = UserInterface.GetStringData("first name", "the employee's");
+            employee.LastName = UserInterface.GetStringData("last name", "the employee's");
+            employee.EmployeeNumber = int.Parse(UserInterface.GetStringData("employee number", "the employee's"));
+            employee.Email = UserInterface.GetStringData("email", "the employee's");
+            try
+            {
+                Query.RunEmployeeQueries(employee, "update");
+                UserInterface.DisplayUserOptions("Employee update successful.");
+            }
+            catch
+            {
+
+                Console.Clear();
+                UserInterface.DisplayUserOptions("Employee update unsuccessful please try again or type exit;");
+                return;
+
+            }
+                
+
+        }
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
