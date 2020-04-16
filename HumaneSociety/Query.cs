@@ -260,7 +260,7 @@ namespace HumaneSociety
                 Console.WriteLine("Please retry and enter a vaild Id");
                 return;
             }
-            foreach (KeyValuePair<int,string> value in updates)
+            foreach (KeyValuePair<int, string> value in updates)
             {
                 switch (value.Key)
                 {
@@ -310,8 +310,9 @@ namespace HumaneSociety
         // TODO: Animal Multi-Trait Search
         internal static List<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
         {
+
             List<Animal> animalsToSearch = db.Animals.ToList();
-            foreach(KeyValuePair<int,string> update in updates)
+            foreach (KeyValuePair<int, string> update in updates)
             {
                 switch (update.Key)
                 {
@@ -347,11 +348,13 @@ namespace HumaneSociety
                         break;
                     default:
                         break;
+                        
                 }
+
             }
             return animalsToSearch;
+             
         }
-
         // TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
@@ -382,9 +385,8 @@ namespace HumaneSociety
                 newAdoption.PaymentCollected = true;
                 db.Adoptions.InsertOnSubmit(newAdoption);
                 db.SubmitChanges();
-            
         }
-
+        
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
             return db.Adoptions;
@@ -410,6 +412,7 @@ namespace HumaneSociety
         {
             var shots = db.AnimalShots.Where(a => a.AnimalId == animal.AnimalId);
             return db.AnimalShots;
+
         }
 
         internal static void UpdateShot(string shotName, Animal animal)
