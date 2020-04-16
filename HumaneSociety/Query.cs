@@ -310,9 +310,48 @@ namespace HumaneSociety
         }
 
         // TODO: Animal Multi-Trait Search
-        internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
+        internal static List<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
         {
-            throw new NotImplementedException();
+            List<Animal> animalsToSearch = db.Animals.ToList();
+            foreach(KeyValuePair<int,string> update in updates)
+            {
+                switch (update.Key)
+                {
+                    case 1:
+                        animalsToSearch = animalsToSearch.Where(h => h.Age == Convert.ToInt32(update.Value)).ToList();
+                        break;
+                    case 2:
+                        animalsToSearch = animalsToSearch.Where(i => i.AnimalId == Convert.ToInt32(update.Value)).ToList();
+                        break;
+                    case 3:
+                        animalsToSearch = animalsToSearch.Where(j => j.Category.Name == (update.Value)).ToList();
+                        break;
+                    case 4:
+                        animalsToSearch = animalsToSearch.Where(k => k.Demeanor == (update.Value)).ToList();
+                        break;
+                    case 5:
+                        animalsToSearch = animalsToSearch.Where(l => l.DietPlan.Name == (update.Value)).ToList();
+                        break;
+                    case 6:
+                        animalsToSearch = animalsToSearch.Where(m => m.Gender == (update.Value)).ToList();
+                        break;
+                    case 7:
+                        animalsToSearch = animalsToSearch.Where(n => n.KidFriendly == Convert.ToBoolean(update.Value)).ToList();
+                        break;
+                    case 8:
+                        animalsToSearch = animalsToSearch.Where(o => o.Name == (update.Value)).ToList();
+                        break;
+                    case 9:
+                        animalsToSearch = animalsToSearch.Where(p => p.PetFriendly == Convert.ToBoolean(update.Value)).ToList();
+                        break;
+                    case 0:
+                        animalsToSearch = animalsToSearch.Where(q => q.Weight == Convert.ToInt32(update.Value)).ToList();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return animalsToSearch;
         }
 
         // TODO: Misc Animal Things
