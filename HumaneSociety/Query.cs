@@ -251,7 +251,56 @@ namespace HumaneSociety
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
         {
-            throw new NotImplementedException();
+            Animal animalToBeUpdated = null;
+            try
+            {
+                animalToBeUpdated = db.Animals.Where(g => g.AnimalId == animalId).FirstOrDefault();
+            }
+            catch
+            {
+                Console.WriteLine("No Id was found matching");
+                Console.WriteLine("Please retry and enter a vaild Id");
+                return;
+            }
+            foreach (KeyValuePair<int,string> value in updates)
+            {
+                switch (value.Key)
+                {
+                    case 1:
+                        animalToBeUpdated.AdoptionStatus = value.Value;
+                        break;
+                    case 2:
+                        animalToBeUpdated.Age = int.Parse(value.Value);
+                        break;
+                    case 3:
+                        animalToBeUpdated.AnimalId = int.Parse(value.Value);
+                        break;
+                    case 4:
+                        animalToBeUpdated.Category.Name = value.Value;
+                        break;
+                    case 5:
+                        animalToBeUpdated.Demeanor = value.Value;
+                        break;
+                    case 6:
+                        animalToBeUpdated.DietPlan.Name = value.Value;
+                        break;
+                    case 7:
+                        animalToBeUpdated.Gender = value.Value;
+                        break;
+                    case 8:
+                        animalToBeUpdated.KidFriendly = Convert.ToBoolean(value.Value);
+                        break;
+                    case 9:
+                        animalToBeUpdated.Name = value.Value;
+                        break;
+                    case 0:
+                        animalToBeUpdated.PetFriendly = Convert.ToBoolean(value.Value);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            db.SubmitChanges();
         }
 
         internal static void RemoveAnimal(Animal animal)
@@ -288,7 +337,15 @@ namespace HumaneSociety
         // TODO: Adoption CRUD Operations
         internal static void Adopt(Animal animal, Client client)
         {
-
+                Adoption newAdoption = new Adoption();
+                newAdoption.AdoptionFee = 75;
+                newAdoption.AnimalId = animal.AnimalId;
+                newAdoption.ClientId = client.ClientId;
+                newAdoption.ApprovalStatus = "Approved";
+                newAdoption.PaymentCollected = true;
+                db.Adoptions.InsertOnSubmit(newAdoption);
+                db.SubmitChanges();
+            
         }
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
