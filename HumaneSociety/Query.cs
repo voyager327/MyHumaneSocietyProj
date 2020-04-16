@@ -202,7 +202,7 @@ namespace HumaneSociety
         internal static void UpdateEmployee(Employee employee)
         {
 
-            Employee employee1 = new Employee(); //////newEmployee needs to be fixed/////
+            Employee newemployee = new Employee(); //////newEmployee needs to be fixed/////
             employee.FirstName = UserInterface.GetStringData("first name", "the employee's");
             employee.LastName = UserInterface.GetStringData("last name", "the employee's");
             employee.EmployeeNumber = int.Parse(UserInterface.GetStringData("employee number", "the employee's"));
@@ -211,17 +211,15 @@ namespace HumaneSociety
             {
                 Query.RunEmployeeQueries(employee, "update");
                 UserInterface.DisplayUserOptions("Employee update successful.");
-                //
+               
             }
             catch
             {
-
                 Console.Clear();
                 UserInterface.DisplayUserOptions("Employee update unsuccessful please try again or type exit;");
                 return;
 
             }
-
 
         }
 
@@ -323,7 +321,6 @@ namespace HumaneSociety
             ShotForAnimal.AnimalId = animal.AnimalId;
             db.AnimalShots.InsertOnSubmit(ShotForAnimal);
             db.SubmitChanges();
-
 
         }
     }
