@@ -350,12 +350,14 @@ namespace HumaneSociety
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
-            throw new NotImplementedException();
+            return db.Adoptions;
         }
 
         internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
         {
-            throw new NotImplementedException();
+            Adoption animalToBeAdopted = null;
+            animalToBeAdopted = db.Adoptions.Where(h => h.AnimalId == adoption.AnimalId && h.ClientId == adoption.ClientId).FirstOrDefault();
+            animalToBeAdopted.ApprovalStatus = isAdopted.ToString();
         }
 
         internal static void RemoveAdoption(int animalId, int clientId)
