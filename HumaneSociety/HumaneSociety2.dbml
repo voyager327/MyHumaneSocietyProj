@@ -8,6 +8,7 @@
       <Association Name="USState_Address" Member="Addresses" ThisKey="USStateId" OtherKey="USStateId" Type="Address" />
     </Type>
   </Table>
+
   <Table Name="dbo.Addresses" Member="Addresses">
     <Type Name="Address">
       <Column Name="AddressId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />

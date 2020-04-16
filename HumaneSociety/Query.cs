@@ -202,7 +202,7 @@ namespace HumaneSociety
         internal static void UpdateEmployee(Employee employee)
         {
 
-            Employee employee1 = new Employee(); //////newEmployee needs to be fixed/////
+            Employee newemployee = new Employee(); //////newEmployee needs to be fixed/////
             employee.FirstName = UserInterface.GetStringData("first name", "the employee's");
             employee.LastName = UserInterface.GetStringData("last name", "the employee's");
             employee.EmployeeNumber = int.Parse(UserInterface.GetStringData("employee number", "the employee's"));
@@ -211,17 +211,15 @@ namespace HumaneSociety
             {
                 Query.RunEmployeeQueries(employee, "update");
                 UserInterface.DisplayUserOptions("Employee update successful.");
-                //
+               
             }
             catch
             {
-
                 Console.Clear();
                 UserInterface.DisplayUserOptions("Employee update unsuccessful please try again or type exit;");
                 return;
 
             }
-
 
         }
 
@@ -262,7 +260,7 @@ namespace HumaneSociety
                 Console.WriteLine("Please retry and enter a vaild Id");
                 return;
             }
-            foreach (KeyValuePair<int,string> value in updates)
+            foreach (KeyValuePair<int, string> value in updates)
             {
                 switch (value.Key)
                 {
@@ -312,8 +310,9 @@ namespace HumaneSociety
         // TODO: Animal Multi-Trait Search
         internal static List<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
         {
+
             List<Animal> animalsToSearch = db.Animals.ToList();
-            foreach(KeyValuePair<int,string> update in updates)
+            foreach (KeyValuePair<int, string> update in updates)
             {
                 switch (update.Key)
                 {
@@ -349,11 +348,13 @@ namespace HumaneSociety
                         break;
                     default:
                         break;
+                        
                 }
+
             }
             return animalsToSearch;
+             
         }
-
         // TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
@@ -384,9 +385,8 @@ namespace HumaneSociety
                 newAdoption.PaymentCollected = true;
                 db.Adoptions.InsertOnSubmit(newAdoption);
                 db.SubmitChanges();
-            
         }
-
+        
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
             return db.Adoptions;
@@ -412,6 +412,7 @@ namespace HumaneSociety
         {
             var shots = db.AnimalShots.Where(a => a.AnimalId == animal.AnimalId);
             return db.AnimalShots;
+
         }
 
         internal static void UpdateShot(string shotName, Animal animal)
@@ -424,7 +425,6 @@ namespace HumaneSociety
             ShotForAnimal.AnimalId = animal.AnimalId;
             db.AnimalShots.InsertOnSubmit(ShotForAnimal);
             db.SubmitChanges();
-
 
         }
     }
